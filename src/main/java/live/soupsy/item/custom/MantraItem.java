@@ -42,6 +42,7 @@ public class MantraItem extends Item {
             if (stack.contains(ModDataComponentTypes.MANTRA)) {
                 MantraComponent mtra = stack.get(ModDataComponentTypes.MANTRA);
                 tooltip.add(Text.literal(mtra.name()).formatted(Formatting.GOLD));
+                tooltip.add(Text.literal(String.valueOf(mtra.damage())).formatted(Formatting.BLUE));
             }
         super.appendTooltip(stack, context, tooltip, type);
     }

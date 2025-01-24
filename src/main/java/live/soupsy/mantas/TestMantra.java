@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TestMantra extends Mantra{
+public class TestMantra extends MantraOld {
 
     private HashMap<String, Integer> requirements;
 

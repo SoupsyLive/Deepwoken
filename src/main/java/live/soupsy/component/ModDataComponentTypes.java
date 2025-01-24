@@ -2,9 +2,7 @@ package live.soupsy.component;
 
 import live.soupsy.Deepwoken;
 import live.soupsy.component.components.MantraComponent;
-import live.soupsy.mantas.Mantra;
 import net.minecraft.component.ComponentType;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;

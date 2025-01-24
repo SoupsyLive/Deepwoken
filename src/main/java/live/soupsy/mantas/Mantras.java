@@ -2,7 +2,7 @@ package live.soupsy.mantas;
 
 
 public class Mantras {
-    public static final Mantra TEST_MANTRA;
+    public static final MantraOld TEST_MANTRA;
 
     public Mantras(){}
 
@@ -11,7 +11,7 @@ public class Mantras {
         TEST_MANTRA = register();
     }
 
-    public static Mantra register()
+    public static MantraOld register()
     {
         return null;
     }

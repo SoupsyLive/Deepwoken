@@ -5,8 +5,11 @@ import live.soupsy.attunements.Attunements;
 import live.soupsy.component.ModDataComponentTypes;
 import live.soupsy.component.components.MantraComponent;
 import live.soupsy.item.ModItems;
+import net.minecraft.component.ComponentType;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 
 
 import java.util.*;
@@ -36,10 +39,12 @@ public abstract class AbstractMantra {
 
     }
 
+
     public AbstractMantra(ItemStack item){
-        var data = item.get(ModDataComponentTypes.MANTRA);
+        MantraComponent data = item.get(ModDataComponentTypes.MANTRA);
         if (data == null)
             return;
+
 
         this.name = data.name();
         String reqAtt = data.reqKeysString();
@@ -98,6 +103,8 @@ public abstract class AbstractMantra {
                 this.level, this.attunementScaling, this.damage, this.etherCost,
                 mods, this.tickCooldown, this.levelDamageScale, this.etherCostMultiplier
         ));
+
+        item.set(DataComponentTypes.CUSTOM_NAME, Text.literal(this.name));
 
         return item;
     }

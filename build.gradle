@@ -32,6 +32,19 @@ repositories {
 			includeGroup "maven.modrinth"
 		}
 	}
+
+	maven {
+		name = 'GeckoLib'
+		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+		content {
+			includeGroup("software.bernie.geckolib")
+		}
+	}
+	maven { // Player Animator
+		name "KosmX's maven"
+		url 'https://maven.kosmx.dev/'
+	}
+
 }
 
 fabricApi {
@@ -51,6 +64,10 @@ dependencies {
 	modImplementation("foundry.veil:veil-fabric-${project.minecraft_version}:${project.veil_version}") {
 		exclude group: "maven.modrinth"
 	}
+
+	/////  ANIMATION DEPENDENCIES  /////
+	modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+	include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim}")
 
 	/////  DEPENDENCIES THAT JUST MAKE LIFE CONVENIENT  /////
 	modRuntimeOnly "maven.modrinth:modmenu:11.0.3"
