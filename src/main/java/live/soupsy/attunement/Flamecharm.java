@@ -1,4 +1,4 @@
-package live.soupsy.attunements;
+package live.soupsy.attunement;
 
 import net.minecraft.entity.Entity;
 
@@ -9,11 +9,6 @@ public class Flamecharm implements Attunement{
     @Override
     public String getAttunementName() {
         return this.name;
-    }
-
-    @Override
-    public String abbrev() {
-        return "Flm";
     }
 
     @Override

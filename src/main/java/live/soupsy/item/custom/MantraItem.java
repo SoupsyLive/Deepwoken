@@ -2,6 +2,7 @@ package live.soupsy.item.custom;
 
 import live.soupsy.component.ModDataComponentTypes;
 import live.soupsy.component.components.MantraComponent;
+import live.soupsy.mantra.Mantra;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -27,6 +28,13 @@ public class MantraItem extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
         if(!world.isClient() && (hand == Hand.MAIN_HAND || hand == Hand.OFF_HAND)){
             // Add mantra to player mantras
+
+            Mantra mantra = new Mantra(itemStack);
+
+                user.sendMessage(Text.literal("Obtained Mantra: "+mantra.getName(false,true,true)));
+                user.sendMessage(Text.literal("Damage: "+mantra.getBaseDamage()).formatted(Formatting.RED));
+                user.sendMessage(Text.literal("Ether Cost: "+mantra.getEtherCost()).formatted(Formatting.AQUA));
+
 
             user.getItemCooldownManager().set(this, 10);
         }

@@ -1,11 +1,10 @@
-package live.soupsy.mantas;
+package live.soupsy.mantra;
 
-import live.soupsy.attunements.Attunement;
-import live.soupsy.attunements.Attunements;
+import live.soupsy.attunement.Attunement;
+import live.soupsy.attunement.Attunements;
 import live.soupsy.component.ModDataComponentTypes;
 import live.soupsy.component.components.MantraComponent;
 import live.soupsy.item.ModItems;
-import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -45,7 +44,11 @@ public abstract class AbstractMantra {
         if (data == null)
             return;
 
+        fillFromComponent(data);
+    }
 
+    private void fillFromComponent(MantraComponent data)
+    {
         this.name = data.name();
         String reqAtt = data.reqKeysString();
         String reqAttStat = data.reqValuesString();
@@ -83,6 +86,10 @@ public abstract class AbstractMantra {
         this.etherCostMultiplier = data.etherCostMultiplier();
     }
 
+    public AbstractMantra() {
+
+    }
+
     public ItemStack toItemStack() {
         ItemStack item = new ItemStack(ModItems.MANTRA);
 
@@ -112,6 +119,5 @@ public abstract class AbstractMantra {
     public boolean reachesRequirements(PlayerEntity player) {
         return false;
     }
-
 
 }
