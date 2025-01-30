@@ -32,7 +32,7 @@ public class Attributes {
 
     static
     {
-        STRENGTH = register("strength", );
+        STRENGTH = register("strength", new Attribute(), "str", "");
         FORTITUDE = register("fortitude", );
         AGILITY = register("agility", );
         INTELLIGENCE = register("intelligence", );
@@ -50,7 +50,7 @@ public class Attributes {
         BLOODREND = register("bloodrend", );
     }
 
-    public static Attribute register(String id, Attribute attData)
+    public static Attribute register(String id, Attribute attData, String abbrev, String desc)
     {
         attributes.put(id, attData);
         return attData;

@@ -3,8 +3,11 @@ package live.soupsy;
 import live.soupsy.component.ModDataComponentTypes;
 import live.soupsy.item.ModItemGroups;
 import live.soupsy.item.ModItems;
+import live.soupsy.loaders.ModResourceReloadListener;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.resource.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +21,11 @@ public class Deepwoken implements ModInitializer {
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
 
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new ModResourceReloadListener());
+
 		LOGGER.info("The deep calls");
 	}
+
+
+
 }
