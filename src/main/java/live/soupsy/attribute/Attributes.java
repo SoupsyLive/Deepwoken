@@ -32,26 +32,30 @@ public class Attributes {
 
     static
     {
-        STRENGTH = register("strength", new Attribute(), "str", "");
-        FORTITUDE = register("fortitude", );
-        AGILITY = register("agility", );
-        INTELLIGENCE = register("intelligence", );
-        WILLPOWER = register("willpower", );
-        CHARISMA = register("charisma", );
-        HEAVY_WEAPON = register("heavy_weapon", );
-        MEDIUM_WEAPON = register("medium_weapon", );
-        LIGHT_WEAPON = register("light_weapon", );
-        FLAMECHARM = register("flamecharm", );
-        FROSTDRAW = register("frostdraw", );
-        THUNDERCALL = register("thundercall", );
-        GALEBREATHE = register("galebreathe", );
-        SHADOWCAST = register("shadowcast", );
-        IRONSING = register("ironsing", );
-        BLOODREND = register("bloodrend", );
+        STRENGTH = register("strength", new Attribute(), "str", "Physical strength. Increases carry load, armor penetration, and the damage scaling of strength mantras.");
+        FORTITUDE = register("fortitude", new Attribute(), "ftd", "Resilience against threats. Increases Health slightly per point.");
+        AGILITY = register("agility", new Attribute(), "agl", "Sleight of Hand and Nimbleness. Increases Parkour and Stealth slightly per point.");
+        INTELLIGENCE = register("intelligence", new Attribute(), "int", "Logic and problem-solving skills. Increases Ether slightly per intelligence point.");
+        WILLPOWER = register("willpower", new Attribute(), "wll", "Your character's mental integrity and ability to keep a steady mind. Increases Sanity and Tempo and reduce knock time per point.");
+        CHARISMA = register("charisma", new Attribute(), "cha", "Your character's ability to influence others with their personality. Increases Ether slightly per Charisma.");
+        HEAVY_WEAPON = register("heavy_weapon", new Attribute(), "hvy", "Increases your character's proficiency with heavy weapons—this increases the extra damage dealt by your weapon's scaling.");
+        MEDIUM_WEAPON = register("medium_weapon", new Attribute(), "med", "Increases your character's proficiency with medium weapons—this increases the extra damage dealt by your weapon's scaling.");
+        LIGHT_WEAPON = register("light_weapon", new Attribute(), "lht", "Increases your character's proficiency with light weapons—this increases the extra damage dealt by your weapon's scaling.");
+        FLAMECHARM = register("flamecharm", new Attribute(), "fir", "Increases damage scaling of Flamecharm mantras.");
+        FROSTDRAW = register("frostdraw", new Attribute(), "ice", "Increases damage scaling of Frostdraw mantras.");
+        THUNDERCALL = register("thundercall", new Attribute(), "ltn", "Increases damage scaling of Thundercall mantras.");
+        GALEBREATHE = register("galebreathe", new Attribute(), "wnd", "Increases damage scaling of Galebreathe mantras.");
+        SHADOWCAST = register("shadowcast", new Attribute(), "sdw", "Increases damage scaling of Shadowcast mantras and the amount of ether you steal from enemies.");
+        IRONSING = register("ironsing", new Attribute(), "mtl", "Increases damage scaling of Ironsing mantras.");
+        BLOODREND = register("bloodrend", new Attribute(), "bld", "Increases damage scaling of Bloodrend mantras.");
     }
 
     public static Attribute register(String id, Attribute attData, String abbrev, String desc)
     {
+        attData.setAbbrev(abbrev);
+        attData.setDescription(desc);
+        attData.setId(id);
+
         attributes.put(id, attData);
         return attData;
     }

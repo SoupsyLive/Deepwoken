@@ -20,11 +20,9 @@ public class Mantra extends AbstractMantra{
         return name;
     }
 
-    public String getName(boolean useStatColor, boolean addStars, boolean addLevel)
+    public String getName(boolean addStars, boolean addLevel)
     {
         StringBuilder mantraString = new StringBuilder();
-        if (useStatColor)
-            mantraString.append("§").append(attunement.getAttunementColor());
         mantraString.append(name);
         if (addStars)
         {
@@ -51,7 +49,7 @@ public class Mantra extends AbstractMantra{
     {
         float levelDmgModifier = damage * Float.max(1, (level*levelDamageScale));
         levelDmgModifier -= damage;
-        float attunementDmgModifier = damage * Float.max(1, (attunementScaling * 1)); // TODO: REPLACE LATER WITH ATT STAT
+        float attunementDmgModifier = damage * Float.max(1, (attributeScaling * 1)); // TODO: REPLACE LATER WITH ATT STAT
         attunementDmgModifier -= damage;
         return damage + levelDmgModifier + attunementDmgModifier;
     }

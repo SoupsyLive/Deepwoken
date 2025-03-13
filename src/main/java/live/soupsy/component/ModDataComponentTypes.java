@@ -2,6 +2,7 @@ package live.soupsy.component;
 
 import live.soupsy.Deepwoken;
 import live.soupsy.component.components.MantraComponent;
+import live.soupsy.component.components.WeaponComponent;
 import net.minecraft.component.ComponentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -13,6 +14,9 @@ public class ModDataComponentTypes {
 
     public static final ComponentType<MantraComponent> MANTRA =
             register("mantra", builder -> builder.codec(MantraComponent.CODEC));
+    public static final ComponentType<WeaponComponent> WEAPON =
+            register("weapon", builder -> builder.codec(WeaponComponent.CODEC));
+
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator){
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(Deepwoken.MOD_ID, name),

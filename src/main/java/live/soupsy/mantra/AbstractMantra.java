@@ -1,10 +1,11 @@
 package live.soupsy.mantra;
 
-import live.soupsy.attunement.Attunement;
-import live.soupsy.attunement.Attunements;
+import live.soupsy.attribute.Attribute;
+import live.soupsy.attribute.Attributes;
 import live.soupsy.component.ModDataComponentTypes;
 import live.soupsy.component.components.MantraComponent;
 import live.soupsy.item.ModItems;
+import live.soupsy.util.DataConversions;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -16,10 +17,11 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractMantra {
     protected String name;
-    protected HashMap<Attunement, Integer> requirements;
+    protected String mantraId;
+    protected HashMap<Attribute, Integer> requirements;
 
     // Stats
-    protected Attunement attunement;
+    protected Attribute mainAttribute;
     protected int rating; // Star count
     protected int level; // Ya know, when ya level up stuff
 
@@ -31,7 +33,7 @@ public abstract class AbstractMantra {
     // Var Modifiers
     protected float levelDamageScale; // Mult to increase base damage by level
     protected float etherCostMultiplier; // Total changes from everything
-    protected float attunementScaling; // Mult to increase base damage by attunement stat
+    protected float attributeScaling; // Mult to increase base damage by attunement stat
 
     public AbstractMantra(String name)
     {
@@ -50,26 +52,17 @@ public abstract class AbstractMantra {
     private void fillFromComponent(MantraComponent data)
     {
         this.name = data.name();
+        this.mantraId = data.mantraId();
         String reqAtt = data.reqKeysString();
         String reqAttStat = data.reqValuesString();
 
         this.requirements = new HashMap<>();
+        DataConversions.twoStringToHashMap(requirements, data.reqKeysString(), data.reqValuesString());
 
-        List<String> reqsKeys = Arrays.asList(reqAtt.split(","));
-        List<String> reqsValues = Arrays.asList(reqAttStat.split(","));
-
-        for (int i=0; i<reqsKeys.size(); i++)
-        {
-            Attunement att = Attunements.getFromString(reqsKeys.get(i));
-            int val = Integer.parseInt(reqsValues.get(i));
-            if(att != null)
-                requirements.put(att, val);
-        }
-
-        this.attunement = Attunements.getFromString(data.attunementId());
+        this.mainAttribute = Attributes.getFromString(data.mainAttributeId());
         this.rating = data.rating();
         this.level = data.level();
-        this.attunementScaling = data.attunementScaling();
+        this.attributeScaling = data.mainAttributeScaling();
 
         this.damage = data.damage();
         this.etherCost = data.etherCost();
@@ -93,9 +86,9 @@ public abstract class AbstractMantra {
     public ItemStack toItemStack() {
         ItemStack item = new ItemStack(ModItems.MANTRA);
 
-        Set<Attunement> atts = this.requirements.keySet();
+        Set<Attribute> atts = this.requirements.keySet();
         String reqs = atts.stream()
-                .map(Attunement::toString)
+                .map(Attribute::getId)
                 .collect(Collectors.joining(","));
 
         Collection<Integer> values = this.requirements.values();
@@ -106,8 +99,8 @@ public abstract class AbstractMantra {
                 .toList());
 
         item.set(ModDataComponentTypes.MANTRA, new MantraComponent(
-                this.name, reqs, cols, this.attunement.toString(), this.rating,
-                this.level, this.attunementScaling, this.damage, this.etherCost,
+                this.name, this.mantraId, reqs, cols, this.mainAttribute.getId(), this.rating,
+                this.level, this.attributeScaling, this.damage, this.etherCost,
                 mods, this.tickCooldown, this.levelDamageScale, this.etherCostMultiplier
         ));
 

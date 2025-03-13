@@ -3,6 +3,7 @@ package live.soupsy;
 import live.soupsy.component.ModDataComponentTypes;
 import live.soupsy.item.ModItemGroups;
 import live.soupsy.item.ModItems;
+import live.soupsy.loaders.DatapackLoader;
 import live.soupsy.loaders.ModResourceReloadListener;
 import net.fabricmc.api.ModInitializer;
 
@@ -20,6 +21,8 @@ public class Deepwoken implements ModInitializer {
 		ModDataComponentTypes.registerDataComponentTypes();
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
+
+		DatapackLoader.register();
 
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new ModResourceReloadListener());
 

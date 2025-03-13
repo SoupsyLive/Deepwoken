@@ -20,6 +20,8 @@ public class ModItemGroups {
                     .displayName(Text.translatable("itemgroup.deepwoken.deepwoken_items"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.MANTRA);
+                        entries.add(ModItems.WEAPON);
+
                     })
                     .build());
 
@@ -32,6 +34,18 @@ public class ModItemGroups {
                         entries.add(ModItems.MANTRA);
                     })
                     .build());
+
+    public static final ItemGroup WEAPONS = Registry.register(Registries.ITEM_GROUP,
+            Identifier.of(Deepwoken.MOD_ID, "deepwoken_weapons"),
+            FabricItemGroup.builder()
+                    .icon(() -> new ItemStack(ModItems.WEAPON))
+                    .displayName(Text.translatable("itemgroup.deepwoken.deepwoken_weapons"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(ModItems.WEAPON);
+                    })
+                    .build());
+
+
 
 
     public static void registerItemGroups(){

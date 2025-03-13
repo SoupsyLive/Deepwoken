@@ -2,7 +2,9 @@ package live.soupsy.item.custom;
 
 import live.soupsy.component.ModDataComponentTypes;
 import live.soupsy.component.components.MantraComponent;
+import live.soupsy.component.components.WeaponComponent;
 import live.soupsy.mantra.Mantra;
+import live.soupsy.weapon.Weapon;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,8 +20,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class MantraItem extends Item {
-    public MantraItem(Settings settings) {
+public class WeaponItem extends Item {
+    public WeaponItem(Settings settings) {
         super(settings);
     }
 
@@ -29,11 +31,9 @@ public class MantraItem extends Item {
         if(!world.isClient() && (hand == Hand.MAIN_HAND || hand == Hand.OFF_HAND)){
             // Add mantra to player mantras
 
-            Mantra mantra = new Mantra(itemStack);
+            Weapon weapon = new Weapon(itemStack);
 
-                user.sendMessage(Text.literal("Obtained Mantra: "+mantra.getName(true,true)));
-                user.sendMessage(Text.literal("Damage: "+mantra.getBaseDamage()).formatted(Formatting.RED));
-                user.sendMessage(Text.literal("Ether Cost: "+mantra.getEtherCost()).formatted(Formatting.AQUA));
+                user.sendMessage(Text.literal("Aquired: "+itemStack.getName()));
 
 
             user.getItemCooldownManager().set(this, 10);
@@ -47,25 +47,12 @@ public class MantraItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-            if (stack.contains(ModDataComponentTypes.MANTRA)) {
-                MantraComponent mtra = stack.get(ModDataComponentTypes.MANTRA);
+            if (stack.contains(ModDataComponentTypes.WEAPON)) {
+                WeaponComponent mtra = stack.get(ModDataComponentTypes.WEAPON);
                 tooltip.add(Text.literal(mtra.name()).formatted(Formatting.GOLD));
-                tooltip.add(Text.literal(String.valueOf(mtra.damage())).formatted(Formatting.BLUE));
+                tooltip.add(Text.literal(String.valueOf(mtra.baseDamage())).formatted(Formatting.BLUE));
             }
         super.appendTooltip(stack, context, tooltip, type);
     }
 
-    @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (!user.getAbilities().creativeMode)
-            return super.useOnEntity(stack, user, entity, hand);
-            // If not in creative, ignore
-
-        // Add Mantra to ENTITY of player
-        user.getItemCooldownManager().set(this, 10);
-
-
-
-        return super.useOnEntity(stack, user, entity, hand);
-    }
 }
